@@ -1,0 +1,36 @@
+<configuration>
+
+    <property resource="application.properties" />
+    <property name="LOG_DIRECTORY" value="${logs.path}" />
+
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+
+    <!--============================== Console log appender =======================-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+           <pattern>%d{HH:mm:ss.SSS} %marker [%thread] %-5level %logger{36} - %msg%n</pattern>
+         </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIRECTORY}/logs/sap_proxy.log</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>%d{dd-MM HH:mm:ss} [%thread] %-5level %logger{36}:%M - %msg%n</Pattern>
+            </layout>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIRECTORY}/logs/sap_proxy_part.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>20MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!--<logger name="ru.integral" level="error"/>-->
+    <!--============================== Console log appender =======================-->
+    <root level="${logs.level}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

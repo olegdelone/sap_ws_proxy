@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+       xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd
+        http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd"
+       default-lazy-init="false"
+       default-init-method="init">
+
+    <!--=========================== Services binding ==================================-->
+    <!--*******************************************************************************-->
+    <!--<wss:binding url="/services/SapCrudService">-->
+        <!--<wss:service>-->
+            <!--<ws:service bean="#sapCrudService" impl="ru.integral.services.first.SapCrudServiceImpl"/>-->
+        <!--</wss:service>-->
+    <!--</wss:binding>-->
+    <!--<bean id="sapCrudService" class="ru.integral.services.first.SapCrudServiceImpl"/>-->
+    <!--*******************************************************************************-->
+
+    <!--*******************************************************************************-->
+    <wss:binding url="/services/SecondSapCrudService">
+        <wss:service>
+            <ws:service bean="#secondSapCrudService" impl="ru.integral.services.second.SecondSapCrudServiceImpl"/>
+        </wss:service>
+    </wss:binding>
+    <bean id="secondSapCrudService" class="ru.integral.services.second.SecondSapCrudServiceImpl"/>
+    <!--*******************************************************************************-->
+
+
+</beans>
